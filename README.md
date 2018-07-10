@@ -15,13 +15,19 @@ sudo rabbitmqctl status
 sudo rabbitmqctl stop # stop the rabbitmq
 ```
 RabbitMQ has a default user guest, but a new user is needed for remote access
+
 `sudo rabbitmqctl add_user myuser mypassword`
+
 a virtual host and allow that user access to that virtual host
+
 `sudo rabbitmqctl add_vhost myvhost`
+
 `sudo rabbitmqctl set_user_tags myuser mytag`
+
 `sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"`
 
 add `PATH=$PATH:/usr/local/sbin` into the shell if needed
+
 set hostname `sudo scutil --set HostName <workspace.local>`. Then add that host name to /etc/hosts
 `127.0.0.1       workspace.local`
 
