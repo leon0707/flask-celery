@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ super() }}
+    send email
+{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block page_body %}
+    <h1 class="text-center">Send emails</h1>
+    <div class="row">
+        <div class="container">
+            <div class="col-md-6 col-md-offset-3">
+                <form method="POST">
+                    <input type="email" name="email" id="email">
+                    <input type="submit" name="submit" value="Send">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock %}

@@ -1,0 +1,2 @@
+hello from celery
+hello from flask
