@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import render_template, session, redirect, url_for, request, jsonify
+import json
 from . import task
 from .tasks import send_async_email, my_background_task
 from app.utiles.email_operation import generate_email
@@ -19,7 +20,15 @@ def send_email():
 
 @task.route('/send_task/<int:i>', methods=['POST'])
 def send_remote_task(i):
-    task = send_task('worker.long_task', [i])
+    if i == 0:
+        msg = {}
+        msg['recipient'] = 'admin@conferency.com'
+        msg['subject'] = 'hello'
+        msg['html'] = '<html><body><h1>hello</h1></body></html>'
+        msg['text'] = 'hello'
+        task = send_task('worker.send_email', [json.dumps(msg)])
+    else:
+        task = send_task('worker.long_task', [i])
     return jsonify({'task_id': task.id})
 
 
