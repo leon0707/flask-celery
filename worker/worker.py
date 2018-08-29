@@ -1,15 +1,16 @@
 import time
 import boto3
 import json
+import os
 from botocore.exceptions import ClientError
 from celery import Celery
 
-CELERY_BROKER_URL = 'amqp://myuser:mypassword@localhost:5672/myvhost'
-CELERY_RESULT_BACKEND = 'amqp://myuser:mypassword@localhost:5672/myvhost'
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
 CELERY_ACCEPT_CONTENT = ['pickle']
 AWS_REGION = 'us-east-1'
 CHARSET = 'UTF-8'
-SENDER = 'no-reply@conferency.com'
+SENDER = os.environ.get('SENDER')
 client = boto3.client('ses', region_name=AWS_REGION)
 
 app = Celery('worker', broker=CELERY_BROKER_URL, backend=CELERY_RESULT_BACKEND)
